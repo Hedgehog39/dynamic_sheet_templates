@@ -59,7 +59,7 @@ function exwod_createRatingEntryHTML(traitType,ratingNameList,capacity){
     //debugger;
     for (var i=0; i < len; i++){
         var ratingDiv = document.createElement('div');
-        ratingDiv.classList.add(CLASSNAME_DSF, CLASSNAME_EXWOD_NAMESPACE, CLASSNAME_TRAIT_RATING);
+        ratingDiv.classList.add(CLASSNAME_EXWOD_NAMESPACE, CLASSNAME_TRAIT_RATING);
         if (traitType == TRAIT_ATTRIBUTE){
             ratingDiv.classList.add(CLASSNAME_MINIMUM_ONE);
         }
@@ -101,26 +101,24 @@ function exwod_createRatingEntryHTML(traitType,ratingNameList,capacity){
 
     var casteFavoredCheckbox = document.createElement('input');
     casteFavoredCheckbox.type='checkbox';
+    casteFavoredCheckbox.classList.add(CLASSNAME_DSF);
     casteFavoredCheckbox.classList.add('dsf_castefavored_'+traitLabel);
+    casteFavoredCheckbox.value='favored';
+
 
     var casteFavoredLabel = document.createElement('label');
-    casteFavoredLabel.classList.add(CLASSNAME_DSF);
-    casteFavoredLabel.classList.add('dsf_castefavored_'+traitLabel);
-    casteFavoredLabel.display='none';
-    casteFavoredLabel.appendChild(casteFavoredCheckbox);
+    casteFavoredLabel.classList.add('trait_label')
+    casteFavoredLabel.innerHTML = casteFavoredCheckbox.outerHTML + traitName + ':';
 
     var specialtySpan = document.createElement('span');
     specialtySpan.classList.add(CLASSNAME_DSF);
     specialtySpan.classList.add('dsf_specialty_'+traitLabel);
 
-    var traitDiv = document.createElement('div');
+    var traitDiv = document.createElement('span');
     traitDiv.classList.add('specialty');
     traitDiv.classList.add('specialty_' +traitLabel);
     traitDiv.setAttribute('cursor','pointer');
-    var tSpan = document.createElement('span');
-    tSpan.innerText=traitName + ':';
-    traitDiv.appendChild(tSpan);
-    traitDiv.appendChild(specialtySpan);
+    traitDiv.innerHTML = specialtySpan.outerHTML + ' (click)';
 
     var groupingDiv = document.createElement('div');
     groupingDiv.className = CLASSNAME_EXWOD_DOTGROUPING;
@@ -131,7 +129,7 @@ function exwod_createRatingEntryHTML(traitType,ratingNameList,capacity){
                     casteFavoredLabel.outerHTML +
                     traitDiv.outerHTML +
                     groupingDiv.outerHTML +
-                    '<!-- end '+capacity+'-dot control -->';
+                    '<!-- end ' + capacity + '-dot control -->';
     return traitHtml;
 }
 
